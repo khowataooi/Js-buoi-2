@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        appearance: textfield;
+        -moz-appearance: textfield;
+      }
+      input {
+        width: 50px;
+        height: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Bài 1: Tính điểm trung bình -->
+    <p>Tính điểm trung bình:</p>
+    <span>Nhập điểm Lý</span>
+    <input type="number" id="physics" />
+    <span>Nhập điểm Hóa</span>
+    <input type="number" id="chemistry" />
+    <span>Nhập điểm Sinh</span>
+    <input type="number" id="biology" />
+    <button onclick="calcAvg()">Tính</button>
+    <p id="result"></p>
+    <br />
+    <!-- Bài 2: Chuyển đổi nhiệt độ -->
+    <p>Chuyển đổi nhiệt độ:</p>
+    <span>Nhập độ C</span>
+    <input type="number" id="celsius" />
+    <button onclick="convert()">Chuyển đổi</button>
+    <p id="fahrenheit"></p>
+    <br />
+    <!-- Bài 3: Tính diện tích hình tròn -->
+    <p>Tính diện tích hình tròn:</p>
+    <span>Nhập bán kính:</span>
+    <input type="number" id="radius1" /><span>cm</span>
+    <button onclick="calcArea()">Tính</button>
+    <p id="circle-area"></p>
+    <br />
+    <!-- Bài 4: Tính chu vi hình tròn -->
+    <p>Tính chu vi hình tròn:</p>
+    <span>Nhập bán kính:</span>
+    <input type="number" id="radius2" /><span>cm</span>
+    <button onclick="calcPerimeter()">Tính</button>
+    <p id="circle-perimeter"></p>
+    <script>
+      // Bài 1: Tính điểm trung bình
+      function calcAvg() {
+        let physics = Number(document.getElementById("physics").value);
+        let chemistry = Number(document.getElementById("chemistry").value);
+        let biology = Number(document.getElementById("biology").value);
+        let avg = (physics + chemistry + biology) / 3;
+        if (avg % 1 === 0) {
+          document.getElementById("result").textContent = `Điểm trung bình là: ${avg}`;
+        } else {
+          document.getElementById("result").textContent = `Điểm trung bình là: ${avg.toFixed(2)}`;
+        }
+      }
+      // Bài 2: Chuyển đổi nhiệt độ
+      function convert() {
+        let celsius = Number(document.getElementById("celsius").value);
+        let fahrenheit = (celsius / 5) * 9 + 32;
+        document.getElementById("fahrenheit").textContent = `Kết quả: ${fahrenheit}°F`;
+      }
+      // Bài 3: Tính diện tích hình tròn
+      function calcArea() {
+        let radius1 = Number(document.getElementById("radius1").value);
+        let circleArea = Math.PI * radius1 ** 2;
+        document.getElementById(
+          "circle-area"
+        ).textContent = `Diện tích hình tròn là: ${circleArea.toFixed(2)}cm²`;
+      }
+      // Bài 4: Tính chu vi hình tròn
+      function calcPerimeter() {
+        let radius2 = Number(document.getElementById("radius2").value);
+        let circlePerimeter = Math.PI * radius2 * 2;
+        document.getElementById("circle-perimeter").textContent = `Chu vi hình tròn là: ${circlePerimeter.toFixed(2)}cm`;
+      }
+    </script>
+  </body>
+</html>

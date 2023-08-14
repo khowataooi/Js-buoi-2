@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      body {
+        /* background: url("https://i.gifer.com/8oXf.gif"); */
+        background-color: rgb(110, 110, 110);
+      }
+      .container {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: repeat(4, 100px);
+        grid-template-rows: repeat(5, 100px);
+      }
+      .container > button {
+        cursor: pointer;
+        font-size: 2rem;
+        border: 1px, solid white;
+        outline: none;
+        background-color: rbga(255, 255, 255, 0.75);
+        height: 100px;
+        border: 1px solid rgb(219, 219, 219);
+      }
+      .container > button:hover {
+        background-color: #a9a9a9;
+      }
+      .span-two {
+        grid-column: span 2;
+      }
+      .screen {
+        grid-column: 1 / -1;
+        background-color: rgba(58, 58, 58, 0.75);
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 10px;
+        word-wrap: break-word;
+        word-break: break-all;
+        color: white;
+        height: 100px;
+        font-size: 40px;
+        border-radius: 20px 20px 0px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="screen" id="screen">0</div>
+      <button class="span-two" onclick="allClear()">AC</button>
+      <button onclick="del()">DEL</button>
+      <button class="btn" value="/">÷</button>
+      <button class="btn num" value="9">9</button>
+      <button class="btn num" value="8">8</button>
+      <button class="btn num" value="7">7</button>
+      <button class="btn" value="*">x</button>
+      <button class="btn num" value="6">6</button>
+      <button class="btn num" value="5">5</button>
+      <button class="btn num" value="4">4</button>
+      <button class="btn" value="+">+</button>
+      <button class="btn num" value="3">3</button>
+      <button class="btn num" value="2">2</button>
+      <button class="btn num" value="1">1</button>
+      <button class="btn" value="-">-</button>
+      <button class="btn num" value="0" style="border-radius: 0px 0px 0px 20px">0</button>
+      <button class="btn" value=".">.</button>
+      <button class="span-two" onclick="calc()" style="border-radius: 0px 0px 20px 0px">=</button>
+    </div>
+    <script>
+      const buttons = document.getElementsByClassName("btn");
+      const numbers = document.getElementsByClassName("num");
+      const screen = document.getElementById("screen");
+      let isAnswer;
+
+      for (let number of numbers) {
+        number.addEventListener("click", function () {
+          if (isAnswer != false) {
+            screen.innerHTML = "";
+          }
+          if (screen.innerHTML.charAt(0) == 0 && screen.innerHTML.match(/^[0-9]+$/) != null) {
+            screen.innerHTML = screen.innerHTML.substring(1);
+          }
+          isAnswer = false;
+        });
+      }
+
+      for (let button of buttons) {
+        button.addEventListener("click", function () {
+          screen.innerHTML += this.value;
+          isAnswer = false;
+        });
+      }
+
+      function del() {
+        let scr = screen.innerHTML;
+        screen.innerHTML = scr.substring(0, scr.length - 1);
+        isAnswer = false;
+      }
+
+      function allClear() {
+        screen.innerHTML = "0";
+        isAnswer = false;
+      }
+
+      function calc() {
+        if (screen.innerHTML) {
+          isAnswer = true;
+          let scr = screen.innerHTML;
+          screen.innerHTML = eval(scr);
+        }
+      }
+    </script>
+  </body>
+</html>
